@@ -1,0 +1,294 @@
+""""""""""""""""""""""Vundle""""""""""""""""""""""""""""""""""""""""""""""""
+"git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
+Plugin 'taglist.vim'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'google/yapf', {'rtp': 'plugins/vim'}
+Plugin 'rking/ag.vim'
+
+call vundle#end()
+filetype plugin indent on
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+syntax enable
+syntax on
+"colorscheme molokai
+
+set number
+set hlsearch incsearch
+set tabstop=4
+set expandtab
+set shiftwidth=4
+"set guifont=YaHei\ Consolas\ Hybrid\ 11.5
+set guifont=Consolas:h12 "under windows
+"hi Comment ctermfg=244
+set smartcase
+set colorcolumn=110
+set cursorline
+set mouse=a
+set ofu=syntaxcomplete#Complete   "ctrl + n
+"set autoindent
+set showmatch
+set laststatus =2
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set tabpagemax=15
+
+let mapleader = "," 
+nnoremap <C-e> :q!<CR>
+
+""""""CSCOPE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"find /home/xiowang/linbhe/stl/sgi -regex ".*\.\(cpp\|c\|h\|hpp\)$" > cscope.files
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+if has("cscope")
+    set cscopetag
+    set csto=0
+    set nocsverb
+    if filereadable("cscope.out")
+        cs add cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set cscopeverbose
+ endif
+ "nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+ "nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+ "nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>   
+
+nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+nnoremap <C-\><C-\>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\><C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\><C-\>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\><C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\><C-\>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\><C-\>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <C-\><C-\>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <C-\><C-\>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""TagList"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Compact_Format=1
+let Tlist_Use_Right_Window=1
+let Tlist_Show_One_File=1  
+let Tlist_Auto_Highlight_tag=1
+let Tlist_Auto_Update=1
+let Tlist_WinWidth=30       
+let Tlist_Exit_OnlyWindow=1 
+let Tlist_Use_SingClick=1
+nnoremap <F3> :TlistToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""NerdTree"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDChristmasTree=1
+let NERDTreeAutoCenter=1
+let NERDTreeMouseMode=2
+let NERDTreeQuitOnOpen=0
+let NERDTreeShowFiles=1
+let NERDTreeShowHidden=1
+let NERDTreeHightCursorline=1
+let NERDTreeShowLineNumbers=0
+let NERDTreeWinPos='left'
+let NERDTreeWinSize=31
+let NERDTreeMinimalUI=1
+nnoremap <F2> :NERDTreeToggle<CR>
+autocmd vimenter * if !argc() | NERDTree | endif  "auto open nerdtree when open vim without file
+"auto close when only nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+set autoread
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""YouCompleteMe""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' 
+"map <F2> :YcmCompleter GoToDefinition<CR>
+"map <F3> :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>   
+nnoremap <leader>i :YcmCompleter GoToInclude<CR>
+nnoremap <leader>j :YcmCompleter GoToImprecise<CR>
+nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py' 
+
+let g:ycm_confirm_extra_conf=0   "打开vim时不再询问是否加载ycm_extra_conf.py配置
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_collect_identifiers_from_tag_files = 1 "使用ctags生成的tags文件
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_key_invoke_completion = '<A-c>'
+let g:ycm_goto_buffer_command = 'vertical-split'
+let g:enable_ycm_at_startup = 0
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>'
+nnoremap <F4> : YcmDiags<CR>!
+"let g:ycm_filetype_blacklist = {
+"        \ 'tagbar' : 1,
+"        \ 'qf' : 1,
+"        \ 'notes' : 1,
+"        \ 'markdown' : 1,
+"        \ 'unite' : 1,
+"        \ 'text' : 1,
+"        \ 'vimwiki' : 1,
+"        \ 'pandoc' : 1,
+"        \ 'infolog' : 1,
+"        \ 'mail' : 1
+"        \}
+"let g:ycm_filetype_specific_completion_to_disable = {
+"        \ 'gitcommit': 1
+"        \}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"grammar error check, but i use it for mapping
+iabbrev <leader>@@ --<cr>helinbo@hust.edu.cn
+
+"nmap ---------- normal mode
+"vmap ---------- visual mode
+"imap ---------- insert mode
+"non-recursive map
+"nnoremap <F2> :Sexplore!<cr>
+
+
+
+nnoremap <leader>n :set number!<cr>
+                                                                                                                                                                           
+nnoremap <leader>bn :bnext<cr>                                                  
+nnoremap <leader>bp :bprevious<cr>                                              
+nnoremap <leader>bf :bfirst<cr>                                                 
+nnoremap <leader>bl :blast<cr>                                                  
+nnoremap <leader>ba :badd                                                       
+nnoremap <leader>bu :bunload<cr>                                                
+nnoremap <leader>bd :bdelete<cr> 
+nnoremap <leader>vsb :vertical sb  
+
+
+""*****************************************************
+""C，C++ 按F5编译运行                                 *
+""*****************************************************
+"map <F5> :call CompileRunGcc()<CR>
+"func! CompileRunGcc()
+"    exec "w"
+"    if &filetype == 'c'
+"        exec "!gcc % -o %<"
+"        exec "! ./%<"
+"    elseif &filetype == 'cpp'
+"        exec "!g++ % -o %<"
+"        exec "! ./%<"
+"    elseif &filetype == 'java' 
+"        exec "!javac %" 
+"        exec "!java %<"
+"    elseif &filetype == 'sh'
+"        :!./%
+"    endif
+"endfunc
+""*****************************************************
+""C,C++的调试 F8                                      *
+""*****************************************************
+"map <F8> :call Rungdb()<CR>
+"func! Rungdb()
+"    exec "w"
+"    exec "!g++ % -g -o %<"
+"    exec "!gdb ./%<"
+"endfunc
+""*****************************************************
+""键盘命令                                            *
+""*****************************************************
+"nmap <leader>w :w!<cr>
+"nmap <leader>f :find<cr>
+"" 映射全选+复制 ctrl+a
+"map <C-A> ggVGY
+"map! <C-A> <Esc>ggVGY
+"" 选中状态下 Ctrl+c 复制
+"vmap <C-c> "+y
+""*****************************************************
+""新文件标题                                          *
+""*****************************************************
+""新建.c,.h,.sh,.java文件，自动插入文件头 
+"autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
+"""定义函数SetTitle，自动插入文件头 
+"func SetTitle() 
+"    "如果文件类型为.sh文件 
+"    if &filetype == 'sh' 
+"        call setline(1,"\#!/bin/bash") 
+"        call append(line("."), "") 
+"    elseif &filetype == 'python'
+"        call setline(1,"#!/usr/bin/env python")
+"        call append(line("."),"# coding=utf-8")
+"        call append(line(".")+1, "") 
+"
+"    elseif &filetype == 'ruby'
+"        call setline(1,"#!/usr/bin/env ruby")
+"        call append(line("."),"# encoding: utf-8")
+"        call append(line(".")+1, "")
+"    else 
+"        call setline(1, "/*************************************************************************") 
+"        call append(line("."),   "  > File Name   : ".expand("%")) 
+"        call append(line(".")+1, "  > Author      : zhoutk") 
+"        call append(line(".")+2, "  > Mail        : zhoutk@189.cn") 
+"        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
+"        call append(line(".")+4, " ************************************************************************/") 
+"        call append(line(".")+5, "")
+"    endif
+"    if expand("%:e") == 'cpp'
+"        call append(line(".")+6, "#include<iostream>")
+"        call append(line(".")+7, "using namespace std;")
+"        call append(line(".")+8, "")
+"    endif
+"    if &filetype == 'c'
+"        call append(line(".")+6, "#include<stdio.h>")
+"        call append(line(".")+7, "")
+"    endif
+"    if expand("%:e") == 'h'
+"        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+"        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+"        call append(line(".")+8, "#endif")
+"    endif
+"    if &filetype == 'java'
+"        call append(line(".")+6,"public class ".expand("%:r"))
+"        call append(line(".")+7,"")
+"    endif
+"    "新建文件后，自动定位到文件末尾
+"endfunc 
+"autocmd BufNewFile * normal G
+"
+""*****************************************************
+""代码格式优化化                                      *
+""*****************************************************
+"
+"map <F6> :call FormartSrc()<CR><CR>
+"
+""定义FormartSrc()
+"func FormartSrc()
+"    exec "w"
+"    if &filetype == 'c'
+"        exec "!astyle --style=ansi -a --suffix=none %"
+"    elseif &filetype == 'cpp' || &filetype == 'hpp'
+"        exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
+"    elseif &filetype == 'perl'
+"        exec "!astyle --style=gnu --suffix=none %"
+"    elseif &filetype == 'py'||&filetype == 'python'
+"        exec "r !autopep8 -i --aggressive %"
+"    elseif &filetype == 'java'
+"        exec "!astyle --style=java --suffix=none %"
+"    elseif &filetype == 'jsp'
+"        exec "!astyle --style=gnu --suffix=none %"
+"    elseif &filetype == 'xml'
+"        exec "!astyle --style=gnu --suffix=none %"
+"    else
+"        exec "normal gg=G"
+"        return
+"    endif
+"    exec "e! %"
+"endfunc
