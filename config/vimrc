@@ -44,6 +44,9 @@ set laststatus =2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 set tabpagemax=15
 
+noremap <C-c> :s/^/\/\//<Enter>
+nnoremap <C-\> :s/^\/\///<Enter>
+
 let mapleader = "," 
 nnoremap <C-e> :q!<CR>
 
