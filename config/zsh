@@ -1,0 +1,5 @@
+vim ~/.oh-my-zsh/themes/robbyrussell.zsh-theme 
+PROMPT='${ret_status} %{$fg[cyan]%}%d%{$reset_color%} $(git_prompt_info)'                                     
+PROMPT="$fg[cyan]%}$USER@%{$fg[blue]%}%m ${PROMPT}"      
+
+
