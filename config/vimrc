@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'taglist.vim'
 Plugin 'scrooloose/nerdtree'
@@ -27,8 +27,12 @@ syntax on
 
 set number
 set hlsearch incsearch
-set tabstop=4
+
+"expand [tab] to [space]
 set expandtab
+"1 [tab] to 2 [space]
+set softtabstop=4
+"set tabstop=4
 set shiftwidth=4
 "set guifont=YaHei\ Consolas\ Hybrid\ 11.5
 set guifont=Consolas:h12 "under windows
