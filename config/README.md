@@ -9,3 +9,5 @@
     4. fix ~/.zshrc ZSH_THEME="candy"
     5. fix ~/.oh-my-zsh/themes/candy.zsh-theme
 
+#tmux
+    1. apt install tmux
