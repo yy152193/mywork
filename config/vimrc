@@ -23,7 +23,8 @@ filetype plugin indent on
 
 syntax enable
 syntax on
-"colorscheme molokai
+"darkblue desert delek elflord koehler pablo
+colorscheme desert
 
 set number
 set hlsearch incsearch
@@ -158,7 +159,7 @@ let g:ycm_use_clangd = 1
 let g:ycm_always_populate_location_list = 1
 
 highlight YcmErrorLine guibg=#3f0000
-highlight YcmWarningLine guibg=#000f00
+highlight YcmWarningLine guibg=#3f0000
 "          YcmErrorSign
 "          YcmWarningSign
 
