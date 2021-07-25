@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
+"maybe need to install ctags first in case error not an editor command
 Plugin 'taglist.vim'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'tomasr/molokai'
