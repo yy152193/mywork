@@ -1,6 +1,6 @@
 # copy vimrc to ~/.vimrc
     1. YouCompleteMe 
-        a. MANUAL install bcuz of submodule 
+        a. MANUAL install because of submodule 
         b. For cmake/gnu/ninja, goto YCM GIT to know how to generate COMPILATION DATABASE
         b. For other compiler, cp/link YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py \
            to WORKDIRECTORY and add "find . -name include" to FLAGS
