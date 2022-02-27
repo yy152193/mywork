@@ -19,6 +19,7 @@
        2) vim ~/.zshrc
             plugins=( [plugins...] zsh-syntax-highlighting)
        3) source ~/.zshrc
+
     7. zsh-autosuggestions
        1) git clone git://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/plugins/zsh-autosuggestions   
        2) vim ~/.zshrc
