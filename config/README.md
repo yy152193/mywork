@@ -14,5 +14,19 @@
     5. fix ~/.oh-my-zsh/themes/candy.zsh-theme
         PROMPT=$'%{$fg_bold[green]%}%n@%m %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info) %{$fg[red]%}$%{$reset_color%} '
 
+    6. zsh-syntax-highlighting
+       1) git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+       2) vim ~/.zshrc
+            plugins=( [plugins...] zsh-syntax-highlighting)
+       3) source ~/.zshrc
+    7. zsh-autosuggestions
+       1) git clone git://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/plugins/zsh-autosuggestions   
+       2) vim ~/.zshrc
+            plugins=( [plugins...] zsh-autosuggestions)
+       3) source ~/.zshrc
+       4) vim ~/.zshrc
+            export TERM=xterm-256color
+       5) source ~/.zshrc
+
 #tmux
     1. apt install tmux
