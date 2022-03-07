@@ -1,14 +1,23 @@
+set nocompatible
+
+filetype off
+"git clone https://github.com/junegunn/vim-plug.git ~/.vim/vim-plug.git
+"copy vim-plug.vim ~/.vim/autoload/
+call plug#begin()
+"default plugin directory is ~/.vim/plugged
+"Plug 'ludovicchabant/vim-gutentags'
+call plug#end()
+
 """"""""""""""""""""""Vundle""""""""""""""""""""""""""""""""""""""""""""""""
 "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set nocompatible
-filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
-Plugin 'taglist.vim' "maybe need to install ctags first in case error not an editor command
+"maybe need to install ctags first in case error not an editor command
+Plugin 'taglist.vim'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
@@ -20,7 +29,8 @@ Plugin 'Shougo/vimshell.vim'
 call vundle#end()
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+set tags=./.tags;,.tags
+set autochdir
 syntax enable
 syntax on
 "darkblue desert delek elflord koehler pablo
@@ -55,42 +65,20 @@ vnoremap <C-\> :s/^\/\///<Enter>
 let mapleader = "," 
 nnoremap <C-e> :q!<CR>
 
-""""""CSCOPE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"find /home/xiowang/linbhe/stl/sgi -regex ".*\.\(cpp\|c\|h\|hpp\)$" > cscope.files
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-if has("cscope")
-    set cscopetag
-    set csto=0
-    set nocsverb
-    if filereadable("cscope.out")
-        cs add cscope.out
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-    set cscopeverbose
- endif
- "nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
- "nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
- "nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>   
+"""""""""""gutentags""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+"let g:gutentags_ctags_tagfile = '.tags'
+"let s:vim_tags = expand('~/.cache/tags')
+"let g:gutentags_cache_dir = s:vim_tags
+"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"
+"if !isdirectory(s:vim_tags)
+"   silent! call mkdir(s:vim_tags, 'p')
+"endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-nnoremap <C-\><C-\>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\><C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\><C-\>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\><C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\><C-\>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\><C-\>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
-nnoremap <C-\><C-\>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nnoremap <C-\><C-\>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""TagList"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F3> :TlistToggle<CR>
@@ -184,7 +172,7 @@ highlight YcmWarningLine guibg=#3f0000
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "grammar error check, but i use it for mapping
-iabbrev <leader>@@ --<cr>helinbo@hust.edu.cn
+iabbrev <leader>@@ --<cr>helloworld@mail.com
 
 "nmap ---------- normal mode
 "vmap ---------- visual mode
@@ -202,94 +190,43 @@ nnoremap <leader>bu :bunload<cr>
 nnoremap <leader>bd :bdelete<cr>
 nnoremap <leader>vsb :vertical sb<cr>
 
+""""""
+"obsolete
+""""""
+""""""CSCOPE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"find ~/stl/sgi -regex ".*\.\(cpp\|c\|h\|hpp\)$" > cscope.files
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
+"if has("cscope")
+"    set cscopetag
+"    set csto=0
+"    set nocsverb
+"    if filereadable("cscope.out")
+"        cs add cscope.out
+"    elseif $CSCOPE_DB != ""
+"        cs add $CSCOPE_DB
+"    endif
+"    set cscopeverbose
+" endif
+"nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>   
+"
+"nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+"nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+"
+"nnoremap <C-\><C-\>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\><C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\><C-\>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\><C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\><C-\>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <C-\><C-\>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+"nnoremap <C-\><C-\>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"nnoremap <C-\><C-\>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""*****************************************************
-""键盘命令                                            *
-""*****************************************************
-"nmap <leader>w :w!<cr>
-"nmap <leader>f :find<cr>
-"" 映射全选+复制 ctrl+a
-"map <C-A> ggVGY
-"map! <C-A> <Esc>ggVGY
-"" 选中状态下 Ctrl+c 复制
-"vmap <C-c> "+y
-""*****************************************************
-""新文件标题                                          *
-""*****************************************************
-""新建.c,.h,.sh,.java文件，自动插入文件头 
-"autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
-"""定义函数SetTitle，自动插入文件头 
-"func SetTitle() 
-"    "如果文件类型为.sh文件 
-"    if &filetype == 'sh' 
-"        call setline(1,"\#!/bin/bash") 
-"        call append(line("."), "") 
-"    elseif &filetype == 'python'
-"        call setline(1,"#!/usr/bin/env python")
-"        call append(line("."),"# coding=utf-8")
-"        call append(line(".")+1, "") 
-"
-"    elseif &filetype == 'ruby'
-"        call setline(1,"#!/usr/bin/env ruby")
-"        call append(line("."),"# encoding: utf-8")
-"        call append(line(".")+1, "")
-"    else 
-"        call setline(1, "/*************************************************************************") 
-"        call append(line("."),   "  > File Name   : ".expand("%")) 
-"        call append(line(".")+1, "  > Author      : zhoutk") 
-"        call append(line(".")+2, "  > Mail        : zhoutk@189.cn") 
-"        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
-"        call append(line(".")+4, " ************************************************************************/") 
-"        call append(line(".")+5, "")
-"    endif
-"    if expand("%:e") == 'cpp'
-"        call append(line(".")+6, "#include<iostream>")
-"        call append(line(".")+7, "using namespace std;")
-"        call append(line(".")+8, "")
-"    endif
-"    if &filetype == 'c'
-"        call append(line(".")+6, "#include<stdio.h>")
-"        call append(line(".")+7, "")
-"    endif
-"    if expand("%:e") == 'h'
-"        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-"        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-"        call append(line(".")+8, "#endif")
-"    endif
-"    if &filetype == 'java'
-"        call append(line(".")+6,"public class ".expand("%:r"))
-"        call append(line(".")+7,"")
-"    endif
-"    "新建文件后，自动定位到文件末尾
-"endfunc 
-"autocmd BufNewFile * normal G
-"
-""*****************************************************
-""代码格式优化化                                      *
-""*****************************************************
-"
-"map <F6> :call FormartSrc()<CR><CR>
-"
-""定义FormartSrc()
-"func FormartSrc()
-"    exec "w"
-"    if &filetype == 'c'
-"        exec "!astyle --style=ansi -a --suffix=none %"
-"    elseif &filetype == 'cpp' || &filetype == 'hpp'
-"        exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
-"    elseif &filetype == 'perl'
-"        exec "!astyle --style=gnu --suffix=none %"
-"    elseif &filetype == 'py'||&filetype == 'python'
-"        exec "r !autopep8 -i --aggressive %"
-"    elseif &filetype == 'java'
-"        exec "!astyle --style=java --suffix=none %"
-"    elseif &filetype == 'jsp'
-"        exec "!astyle --style=gnu --suffix=none %"
-"    elseif &filetype == 'xml'
-"        exec "!astyle --style=gnu --suffix=none %"
-"    else
-"        exec "normal gg=G"
-"        return
-"    endif
-"    exec "e! %"
-"endfunc
