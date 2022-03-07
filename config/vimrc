@@ -7,13 +7,13 @@ call plug#begin()
 "default plugin directory is ~/.vim/plugged
 "Plug 'ludovicchabant/vim-gutentags'
 Plug 'dense-analysis/ale'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """"""""""""""""""""""Vundle""""""""""""""""""""""""""""""""""""""""""""""""
 "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
@@ -26,7 +26,6 @@ Plugin 'google/yapf', {'rtp': 'plugins/vim'}
 Plugin 'rking/ag.vim'
 Plugin 'Shougo/vimproc'
 Plugin 'Shougo/vimshell.vim'
-
 call vundle#end()
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -82,6 +81,7 @@ nnoremap <C-e> :q!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""async linting engine""""""""""""""""""""""""""""""""""""""""
+let g:ale_enabled=1
 "highlight clear ALEErrorSign
 "highlight clear ALEWarningSign
 let g:ale_sign_error = "\ue001"
@@ -166,14 +166,12 @@ let g:ycm_log_level = 'info'
 let g:ycm_key_detailed_diagnostics = '<leader>`'
 let g:ycm_use_clangd = 1
 let g:ycm_always_populate_location_list = 1
-
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 0
 highlight YcmErrorLine guibg=#3f0000
 highlight YcmWarningLine guibg=#3f0000
 "          YcmErrorSign
 "          YcmWarningSign
-
 
 "let g:ycm_filetype_blacklist = {
 "        \ 'tagbar' : 1,
