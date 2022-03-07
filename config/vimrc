@@ -6,6 +6,7 @@ filetype off
 call plug#begin()
 "default plugin directory is ~/.vim/plugged
 "Plug 'ludovicchabant/vim-gutentags'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 """"""""""""""""""""""Vundle""""""""""""""""""""""""""""""""""""""""""""""""
@@ -65,6 +66,7 @@ vnoremap <C-\> :s/^\/\///<Enter>
 let mapleader = "," 
 nnoremap <C-e> :q!<CR>
 
+
 """""""""""gutentags""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 "let g:gutentags_ctags_tagfile = '.tags'
@@ -79,6 +81,23 @@ nnoremap <C-e> :q!<CR>
 "endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""""""""""""""""""async linting engine""""""""""""""""""""""""""""""""""""""""
+"highlight clear ALEErrorSign
+"highlight clear ALEWarningSign
+let g:ale_sign_error = "\ue001"
+"let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""TagList"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F3> :TlistToggle<CR>
@@ -148,6 +167,8 @@ let g:ycm_key_detailed_diagnostics = '<leader>`'
 let g:ycm_use_clangd = 1
 let g:ycm_always_populate_location_list = 1
 
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 0
 highlight YcmErrorLine guibg=#3f0000
 highlight YcmWarningLine guibg=#3f0000
 "          YcmErrorSign
