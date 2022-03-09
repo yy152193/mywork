@@ -8,6 +8,8 @@ call plug#begin()
 "Plug 'ludovicchabant/vim-gutentags'
 Plug 'dense-analysis/ale'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer'}
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call plug#end()
 
 """"""""""""""""""""""Vundle""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,12 +31,13 @@ Plugin 'Shougo/vimshell.vim'
 call vundle#end()
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set tags=./.tags;,.tags
-set autochdir
+"set tags=./.tags;,.tags
+"set autochdir
 syntax enable
 syntax on
 "darkblue desert delek elflord koehler pablo
 colorscheme desert
+highlight Search cterm=NONE ctermfg=grey ctermbg=white
 
 set number
 set hlsearch incsearch
@@ -148,6 +151,9 @@ nnoremap <leader>s :YcmCompleter GoToSymbol<CR>
 nnoremap <leader>t :YcmCompleter GetType<CR>
 
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' 
+let g:ycm_use_clangd = 1
+"let g:ycm_clangd_binary_path='~/clangd'
+let g:ycm_disable_for_files_larger_than_kb = 1000
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py' 
 let g:ycm_confirm_extra_conf=0   "打开vim时不再询问是否加载ycm_extra_conf.py配置
 let g:ycm_seed_identifiers_with_syntax=1
@@ -164,27 +170,35 @@ let g:ycm_auto_trigger = 1
 let g:ycm_keep_logfiles = 0
 let g:ycm_log_level = 'info'
 let g:ycm_key_detailed_diagnostics = '<leader>`'
-let g:ycm_use_clangd = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 0
 highlight YcmErrorLine guibg=#3f0000
 highlight YcmWarningLine guibg=#3f0000
+highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
 "          YcmErrorSign
 "          YcmWarningSign
-
-"let g:ycm_filetype_blacklist = {
-"        \ 'tagbar' : 1,
-"        \ 'qf' : 1,
-"        \ 'notes' : 1,
-"        \ 'markdown' : 1,
-"        \ 'unite' : 1,
-"        \ 'text' : 1,
-"        \ 'vimwiki' : 1,
-"        \ 'pandoc' : 1,
-"        \ 'infolog' : 1,
-"        \ 'mail' : 1
-"        \}
+let g:ycm_filetype_whitelist = { 
+		\ "c":1,
+		\ "cpp":1, 
+                \ "hpp":1,
+		\ "objc":1,
+		\ "sh":1,
+		\ "zsh":1
+		\ }
+let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'qf' : 1,
+        \ 'notes' : 1,
+        \ 'markdown' : 1,
+        \ 'unite' : 1,
+        \ 'text' : 1,
+        \ 'vimwiki' : 1,
+        \ 'pandoc' : 1,
+        \ 'infolog' : 1,
+        \ 'mail' : 1
+        \}
 "let g:ycm_filetype_specific_completion_to_disable = {
 "        \ 'gitcommit': 1
 "        \}
