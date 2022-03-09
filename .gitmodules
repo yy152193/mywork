@@ -1,0 +1,3 @@
+[submodule "config/emacs.d"]
+	path = config/emacs.d
+	url = https://github.com/yy152193/emacs.d.git
