@@ -5,9 +5,18 @@ filetype off
 "copy vim-plug.vim ~/.vim/autoload/
 call plug#begin()
 "default plugin directory is ~/.vim/plugged
-"Plug 'ludovicchabant/vim-gutentags'
 Plug 'dense-analysis/ale'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdcommenter'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf.vim' "fuzzy finder
+Plug 'mhinz/vim-signify'
+Plug 'vim-scripts/winmanager'
+"Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'ludovicchabant/vim-gutentags'
 "Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer'}
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call plug#end()
@@ -218,6 +227,7 @@ nnoremap <leader>bn :bnext<cr>
 nnoremap <leader>bp :bprevious<cr>
 nnoremap <leader>bf :bfirst<cr>
 nnoremap <leader>bl :blast<cr>
+nnoremap <leader>l :ls<cr>
 nnoremap <leader>ba :badd<cr>
 nnoremap <leader>bu :bunload<cr>
 nnoremap <leader>bd :bdelete<cr>
