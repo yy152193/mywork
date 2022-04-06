@@ -2,7 +2,7 @@ set nocompatible
 
 filetype off
 "git clone https://github.com/junegunn/vim-plug.git ~/.vim/vim-plug.git
-"copy vim-plug.vim ~/.vim/autoload/
+"copy plug.vim ~/.vim/autoload/
 call plug#begin()
 "default plugin directory is ~/.vim/plugged
 Plug 'dense-analysis/ale'
